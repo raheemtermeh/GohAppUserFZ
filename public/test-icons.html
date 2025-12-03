@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Icon Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .icon-test { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+        img { width: 100px; height: 100px; border: 1px solid #ddd; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>FunZone Icon Test</h1>
+    
+    <div class="icon-test">
+        <h2>Board Games Icon (New)</h2>
+        <img src="/board_games_icon.png" alt="Board Games" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="display:none;" class="error">❌ Board Games Icon (board_games_icon.png) - NOT FOUND</div>
+        <p>Path: /board_games_icon.png</p>
+    </div>
+    
+    <div class="icon-test">
+        <h2>Group Games Icon (New)</h2>
+        <img src="/group_games_icon.png" alt="Group Games" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="display:none;" class="error">❌ Group Games Icon (group_games_icon.png) - NOT FOUND</div>
+        <p>Path: /group_games_icon.png</p>
+    </div>
+    
+    <div class="icon-test">
+        <h2>Board Games Icon (Old - for comparison)</h2>
+        <img src="/board-games.png" alt="Old Board Games" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="display:none;" class="error">❌ Old Board Games Icon (board-games.png) - NOT FOUND</div>
+        <p>Path: /board-games.png</p>
+    </div>
+    
+    <div class="icon-test">
+        <h2>Group Games Icon (Old - for comparison)</h2>
+        <img src="/group-games.png" alt="Old Group Games" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="display:none;" class="error">❌ Old Group Games Icon (group-games.png) - NOT FOUND</div>
+        <p>Path: /group-games.png</p>
+    </div>
+    
+    <script>
+        // Test if icons load successfully
+        function testIcon(src, name) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve({name, status: 'success', src});
+                img.onerror = () => resolve({name, status: 'error', src});
+                img.src = src;
+            });
+        }
+        
+        // Test all icons
+        Promise.all([
+            testIcon('/board_games_icon.png', 'Board Games (New)'),
+            testIcon('/group_games_icon.png', 'Group Games (New)'),
+            testIcon('/board-games.png', 'Board Games (Old)'),
+            testIcon('/group-games.png', 'Group Games (Old)')
+        ]).then(results => {
+            console.log('Icon Test Results:');
+            results.forEach(result => {
+                console.log(`${result.status === 'success' ? '✅' : '❌'} ${result.name}: ${result.src}`);
+            });
+        });
+    </script>
+</body>
+</html>

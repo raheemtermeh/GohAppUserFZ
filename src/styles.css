@@ -1,0 +1,498 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { 
+    @apply bg-slate-950 text-slate-100 antialiased;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  * {
+    @apply border-slate-800;
+  }
+
+  /* RTL Support */
+  [dir="rtl"] {
+    font-family: 'Shabnam', 'Inter', 'Vazirmatn', 'Tahoma', 'Arial', sans-serif;
+  }
+
+  [dir="ltr"] {
+    font-family: 'Shabnam', 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+  }
+
+  /* RTL-specific styles */
+  [dir="rtl"] .flex-row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  [dir="rtl"] .text-left {
+    text-align: right;
+  }
+
+  [dir="rtl"] .text-right {
+    text-align: left;
+  }
+
+  [dir="rtl"] .ml-auto {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  [dir="rtl"] .mr-auto {
+    margin-right: 0;
+    margin-left: auto;
+  }
+
+  [dir="rtl"] .pl-4 {
+    padding-left: 0;
+    padding-right: 1rem;
+  }
+
+  [dir="rtl"] .pr-4 {
+    padding-right: 0;
+    padding-left: 1rem;
+  }
+
+  [dir="rtl"] .border-l {
+    border-left: none;
+    border-right: 1px solid;
+  }
+
+  [dir="rtl"] .border-r {
+    border-right: none;
+    border-left: 1px solid;
+  }
+}
+
+@layer components {
+  /* Responsive Cards */
+  .card { 
+    @apply bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-900/95 backdrop-blur-md 
+           border border-slate-700/60 rounded-xl2 
+           transition-all duration-300;
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(148, 163, 184, 0.1),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  }
+  
+  .card-compact {
+    @apply card p-2 sm:p-3 md:p-4 lg:p-6;
+  }
+  
+  .card-compact:hover {
+    box-shadow: 
+      0 20px 25px -5px rgba(0, 0, 0, 0.4),
+      0 10px 10px -5px rgba(0, 0, 0, 0.3),
+      0 0 20px rgba(147, 51, 234, 0.15),
+      0 0 0 1px rgba(148, 163, 184, 0.2),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px) scale(1.01);
+    border-color: rgba(148, 163, 184, 0.4);
+  }
+  
+  .card-spacious {
+    @apply card p-4 sm:p-6 md:p-8;
+  }
+  
+  /* Responsive Buttons */
+  .btn { 
+    @apply inline-flex items-center justify-center rounded-xl px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 
+           font-medium transition-all duration-200 text-sm sm:text-base md:text-lg;
+  }
+  
+  .btn-primary { 
+    @apply btn bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 
+           text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 hover:scale-105;
+  }
+  
+  .btn-ghost { 
+    @apply btn bg-slate-800/60 hover:bg-slate-800 text-slate-100;
+  }
+  
+  .btn-secondary { 
+    @apply btn bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 text-white;
+  }
+  
+  .btn-sm {
+    @apply px-2 py-1.5 text-xs rounded-lg;
+  }
+  
+  .btn-lg {
+    @apply px-6 py-3 text-lg rounded-xl;
+  }
+  
+  /* Responsive Chips */
+  .chip { 
+    @apply text-xs sm:text-sm px-2 py-1 sm:px-3 sm:py-1.5 rounded-full bg-slate-800/60 text-slate-200 
+           border border-slate-700/50 backdrop-blur transition-all duration-200;
+  }
+  
+  .chip-active { 
+    @apply bg-gradient-to-r from-purple-500 to-teal-500 text-white border-transparent shadow-lg;
+  }
+  
+  .chip-accent { 
+    @apply bg-gradient-to-r from-pink-500 to-yellow-500 text-white border-transparent shadow-lg;
+  }
+  
+  /* Responsive Inputs */
+  .input { 
+    @apply bg-slate-800/60 rounded-xl px-3 py-2 sm:px-4 sm:py-3 outline-none focus:ring-2 
+           ring-purple-500/40 border border-slate-700/50 backdrop-blur text-sm sm:text-base;
+  }
+  
+  .input-lg {
+    @apply px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg;
+  }
+  
+  /* Responsive Search Bars */
+  .search-bar { 
+    @apply bg-slate-800/40 backdrop-blur border border-slate-700/50 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 
+           flex items-center gap-2 sm:gap-3;
+  }
+  
+  .search-bar-compact { 
+    @apply bg-slate-800/40 backdrop-blur border border-slate-700/50 rounded-xl px-3 py-2 sm:px-4 sm:py-3 
+           flex items-center gap-2 sm:gap-3;
+  }
+  
+  /* Responsive Gradients */
+  .hero-gradient { 
+    @apply bg-gradient-to-br from-purple-600/20 via-teal-600/20 to-pink-600/20;
+  }
+  
+  /* Bottom Sheet Animations */
+  .bottom-sheet-enter {
+    transform: translateY(100%);
+  }
+  
+  .bottom-sheet-enter-active {
+    transform: translateY(0%);
+    transition: transform 300ms ease-out;
+  }
+  
+  .bottom-sheet-exit {
+    transform: translateY(0%);
+  }
+  
+  .bottom-sheet-exit-active {
+    transform: translateY(100%);
+    transition: transform 300ms ease-in;
+  }
+  
+  .glass-card { 
+    @apply bg-slate-900/40 backdrop-blur border border-slate-700/30 rounded-2xl;
+  }
+  
+  /* Responsive Grid Layouts */
+  .grid-responsive {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-6;
+  }
+  
+  .grid-responsive-compact {
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4;
+  }
+  
+  /* Responsive Text */
+  .text-responsive-sm {
+    @apply text-xs sm:text-sm md:text-base;
+  }
+  
+  .text-responsive-base {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+  
+  .text-responsive-lg {
+    @apply text-base sm:text-lg md:text-xl;
+  }
+  
+  .text-responsive-xl {
+    @apply text-lg sm:text-xl md:text-2xl;
+  }
+  
+  .text-responsive-2xl {
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+  
+  /* Responsive Spacing */
+  .space-responsive {
+    @apply space-y-4 sm:space-y-6 md:space-y-8;
+  }
+  
+  .space-responsive-compact {
+    @apply space-y-3 sm:space-y-4 md:space-y-6;
+  }
+  
+  /* Responsive Padding */
+  .p-responsive {
+    @apply p-4 sm:p-6 md:p-8;
+  }
+  
+  .p-responsive-compact {
+    @apply p-3 sm:p-4 md:p-6;
+  }
+  
+  /* Responsive Margins */
+  .m-responsive {
+    @apply m-4 sm:m-6 md:m-8;
+  }
+  
+  .m-responsive-compact {
+    @apply m-3 sm:m-4 md:m-6;
+  }
+  
+  /* Responsive Flexbox */
+  .flex-responsive {
+    @apply flex flex-col sm:flex-row;
+  }
+  
+  .flex-responsive-reverse {
+    @apply flex flex-col-reverse sm:flex-row;
+  }
+  
+  /* Responsive Navigation */
+  .nav-responsive {
+    @apply flex flex-col sm:flex-row items-center gap-3 sm:gap-4 md:gap-6;
+  }
+  
+  /* Responsive Images */
+  .img-responsive {
+    @apply w-full h-auto object-cover;
+  }
+  
+  .img-responsive-square {
+    @apply w-full aspect-square object-cover;
+  }
+  
+  /* Responsive Containers */
+  .container-responsive {
+    @apply w-full px-4 sm:px-6 lg:px-8;
+  }
+  
+  .container-fluid {
+    @apply w-full px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  .text-gradient { 
+    @apply bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent; 
+  }
+  
+  .text-gradient-pink { 
+    @apply bg-gradient-to-r from-pink-400 to-yellow-400 bg-clip-text text-transparent; 
+  }
+  
+  .shadow-glow { 
+    box-shadow: 0 0 20px rgba(134, 57, 239, 0.3); 
+  }
+  
+  .shadow-glow-teal { 
+    box-shadow: 0 0 20px rgba(9, 220, 221, 0.3); 
+  }
+  
+  .shadow-glow-pink { 
+    box-shadow: 0 0 20px rgba(255, 64, 128, 0.3); 
+  }
+  
+  /* Responsive Utilities */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+  
+  /* Responsive Hover Effects */
+  .hover-lift {
+    @apply transition-all duration-300;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+  
+  /* Responsive Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+  
+  /* Responsive Scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Responsive Focus States */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-purple-500/40 focus:ring-offset-2 focus:ring-offset-slate-900;
+  }
+  
+  /* Responsive Transitions */
+  .transition-responsive {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  .transition-smooth {
+    @apply transition-all duration-300 ease-out;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+/* Full Screen Support */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Full screen support for mobile */
+@supports (-webkit-touch-callout: none) {
+  .min-h-dvh {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Ensure full width on all screen sizes */
+.w-full {
+  width: 100% !important;
+}
+
+/* Full screen layout adjustments */
+@media (max-width: 640px) {
+  .glass-card {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
+
+@media (min-width: 641px) {
+  .glass-card {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 640px) {
+  .mobile-only {
+    display: block;
+  }
+  
+  .desktop-only {
+    display: none;
+  }
+}
+
+@media (min-width: 641px) {
+  .mobile-only {
+    display: none;
+  }
+  
+  .desktop-only {
+    display: block;
+  }
+}
+
+/* Responsive Typography Scale */
+@media (max-width: 640px) {
+  .text-responsive {
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+  }
+  
+  .text-responsive-lg {
+    font-size: clamp(1rem, 3vw, 1.125rem);
+  }
+  
+  .text-responsive-xl {
+    font-size: clamp(1.125rem, 3.5vw, 1.25rem);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .text-responsive {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+  }
+  
+  .text-responsive-lg {
+    font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+  }
+  
+  .text-responsive-xl {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+  }
+}
+
+@media (min-width: 1025px) {
+  .text-responsive {
+    font-size: 1.125rem;
+  }
+  
+  .text-responsive-lg {
+    font-size: 1.25rem;
+  }
+  
+  .text-responsive-xl {
+    font-size: 1.5rem;
+  }
+}
+
+
